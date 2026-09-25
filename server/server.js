@@ -61,6 +61,7 @@ app.use(express.json({ limit: '10kb' }));
 app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
+console.log('✅ /api/auth routes cargadas');
 app.use('/api/profile', profileRoutes);
 app.use('/api/weights', weightRoutes);
 app.use('/api/daily-logs', dailyLogRoutes);
@@ -79,6 +80,8 @@ if (isProduction && fs.existsSync(clientDist)) {
     res.sendFile(path.join(clientDist, 'index.html'));
   });
 }
+
+console.log('AUTH ROUTES CARGADAS');
 
 app.use(notFound);
 app.use(errorHandler);
