@@ -1,6 +1,6 @@
-# 🌿 Zen Login App
+# 🌿 Zen App
 
-Login funcional, seguro y listo para producción, con estética zen (verde, tranquilizante).
+App de trackeo de kcalorías, peso, medidas y macronutrientes.
 
 **Stack:** Node.js + Express · React + TypeScript (Vite) · MongoDB Atlas · JWT en cookie httpOnly.
 
