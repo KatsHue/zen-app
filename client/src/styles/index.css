@@ -1,0 +1,785 @@
+:root {
+  /* Paleta zen: verdes suaves, tonos tierra y blancos cálidos */
+  --zen-bg-start: #eef3ea;
+  --zen-bg-end: #dbe7d9;
+  --zen-card: #ffffff;
+  --zen-primary: #6b9080;
+  --zen-primary-dark: #4f6f5c;
+  --zen-primary-light: #a4c3a2;
+  --zen-accent: #cce3de;
+  --zen-text: #2f3e35;
+  --zen-text-soft: #5b6b60;
+  --zen-border: #d8e3d5;
+  --zen-error: #b5654a;
+  --zen-error-bg: #fbeee9;
+  --zen-shadow: 0 20px 45px -20px rgba(47, 62, 53, 0.25);
+  --zen-radius-lg: 24px;
+  --zen-radius-md: 14px;
+  --font-heading: 'Quicksand', 'Nunito', sans-serif;
+  --font-body: 'Nunito', 'Quicksand', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--zen-text);
+  background: linear-gradient(160deg, var(--zen-bg-start), var(--zen-bg-end));
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  color: var(--zen-primary-dark);
+  margin: 0;
+}
+
+.zen-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.zen-page::before,
+.zen-page::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: var(--zen-primary-light);
+  opacity: 0.25;
+  filter: blur(2px);
+  animation: zen-float 8s ease-in-out infinite;
+}
+
+.zen-page::before {
+  width: 220px;
+  height: 220px;
+  top: -60px;
+  left: -60px;
+}
+
+.zen-page::after {
+  width: 280px;
+  height: 280px;
+  bottom: -80px;
+  right: -80px;
+  animation-delay: 2s;
+  background: var(--zen-primary);
+  opacity: 0.18;
+}
+
+@keyframes zen-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(18px); }
+}
+
+.zen-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: var(--zen-card);
+  border-radius: var(--zen-radius-lg);
+  box-shadow: var(--zen-shadow);
+  padding: 40px 36px;
+  border: 1px solid var(--zen-border);
+}
+
+.zen-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--zen-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin: 0 auto 18px;
+}
+
+.zen-card__header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.zen-card__header h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.zen-card__header p {
+  margin-top: 8px;
+  color: var(--zen-text-soft);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.zen-field {
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.zen-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--zen-text-soft);
+  margin-bottom: 6px;
+}
+
+.zen-field input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--zen-radius-md);
+  border: 1.5px solid var(--zen-border);
+  background: #fbfdfa;
+  font-size: 16px;
+  color: var(--zen-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: var(--font-body);
+}
+
+.zen-field input:focus {
+  outline: none;
+  border-color: var(--zen-primary);
+  box-shadow: 0 0 0 4px rgba(107, 144, 128, 0.15);
+}
+
+.zen-btn {
+  width: 100%;
+  padding: 13px 16px;
+  border: none;
+  border-radius: var(--zen-radius-md);
+  background: var(--zen-primary);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+  margin-top: 6px;
+}
+
+.zen-btn:hover:not(:disabled) {
+  background: var(--zen-primary-dark);
+}
+
+.zen-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.zen-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.zen-btn--ghost {
+  background: transparent;
+  color: var(--zen-primary-dark);
+  border: 1.5px solid var(--zen-border);
+}
+
+.zen-btn--ghost:hover:not(:disabled) {
+  background: var(--zen-accent);
+}
+
+.zen-alert {
+  background: var(--zen-error-bg);
+  color: var(--zen-error);
+  border-radius: var(--zen-radius-md);
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+  border: 1px solid rgba(181, 101, 74, 0.25);
+}
+
+.zen-footer-text {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 0.88rem;
+  color: var(--zen-text-soft);
+}
+
+.zen-footer-text a {
+  color: var(--zen-primary-dark);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.zen-footer-text a:hover {
+  text-decoration: underline;
+}
+
+.zen-dashboard {
+  max-width: 480px;
+}
+
+/* --- Barra superior delgada (marca, saludo, cerrar sesión) --- */
+.zen-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.zen-topbar__brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--zen-primary-dark);
+  font-size: 1.05rem;
+}
+
+.zen-topbar__greeting {
+  color: var(--zen-text-soft);
+  font-size: 0.9rem;
+  flex: 1;
+  text-align: center;
+}
+
+.zen-topbar__logout {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  color: var(--zen-primary-dark);
+  font-weight: 600;
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.zen-topbar__logout:hover {
+  color: var(--zen-primary);
+}
+
+/* --- Layout apilado (varias tarjetas en una misma página, ej. Dashboard) --- */
+.zen-page--stacked {
+  align-items: flex-start;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.zen-stack {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.zen-card--wide {
+  max-width: 640px;
+  width: 100%;
+}
+
+/* --- Selects, con el mismo lenguaje visual que los inputs --- */
+.zen-field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--zen-radius-md);
+  border: 1.5px solid var(--zen-border);
+  background: #fbfdfa;
+  font-size: 16px;
+  color: var(--zen-text);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.zen-field select:focus {
+  outline: none;
+  border-color: var(--zen-primary);
+  box-shadow: 0 0 0 4px rgba(107, 144, 128, 0.15);
+}
+
+/* Dos campos lado a lado (ej. edad + estatura) */
+.zen-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* --- Toggle de sexo (segmented control) --- */
+.zen-toggle-group {
+  display: flex;
+  gap: 10px;
+}
+
+.zen-toggle {
+  flex: 1;
+  padding: 11px;
+  border-radius: var(--zen-radius-md);
+  border: 1.5px solid var(--zen-border);
+  background: #fbfdfa;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--zen-text-soft);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.zen-toggle.active {
+  background: var(--zen-primary);
+  color: #ffffff;
+  border-color: var(--zen-primary);
+}
+
+/* --- Switch (interruptor) para activar el modo renal --- */
+.zen-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--zen-primary-dark);
+}
+
+.zen-switch {
+  flex-shrink: 0;
+  width: 46px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--zen-border);
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.zen-switch.on {
+  background: var(--zen-primary);
+}
+
+.zen-switch__dot {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.zen-switch.on .zen-switch__dot {
+  transform: translateX(20px);
+}
+
+/* --- Grid de tarjetas de resultados (kcal, macros, fibra, sodio) --- */
+.zen-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.zen-result-card {
+  background: #fbfdfa;
+  border: 1px solid var(--zen-border);
+  border-radius: var(--zen-radius-md);
+  padding: 16px 18px;
+}
+
+.zen-result-card h3 {
+  font-size: 0.98rem;
+  margin-bottom: 10px;
+  color: var(--zen-primary-dark);
+}
+
+.zen-result-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.85rem;
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--zen-border);
+}
+
+.zen-result-row:last-of-type {
+  border-bottom: none;
+}
+
+.zen-result-row span:first-child {
+  color: var(--zen-text-soft);
+}
+
+.zen-result-row span:last-child {
+  font-weight: 600;
+  text-align: right;
+}
+
+.zen-warning {
+  background: #fff6e6;
+  color: #8a6215;
+  border: 1px solid #f0d9a8;
+  border-radius: var(--zen-radius-md);
+  padding: 8px 10px;
+  font-size: 0.78rem;
+  margin-top: 10px;
+}
+
+.zen-disclaimer {
+  font-size: 0.75rem;
+  color: var(--zen-text-soft);
+  line-height: 1.5;
+  margin-top: 16px;
+}
+
+/* --- Botón pequeño (ej. "Editar", junto a un resumen) --- */
+.zen-btn--small {
+  width: auto;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  margin-top: 0;
+}
+
+a.zen-btn {
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+/* --- Resumen compacto de perfil, con acción de editar --- */
+.zen-profile-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+
+/* --- Fila de registro de peso (input + botón) --- */
+.zen-weight-row {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.zen-weight-row input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: var(--zen-radius-md);
+  border: 1.5px solid var(--zen-border);
+  background: #fbfdfa;
+  font-size: 16px;
+  color: var(--zen-text);
+  font-family: var(--font-body);
+}
+
+.zen-weight-row input:focus {
+  outline: none;
+  border-color: var(--zen-primary);
+  box-shadow: 0 0 0 4px rgba(107, 144, 128, 0.15);
+}
+
+.zen-weight-row .zen-btn {
+  flex-shrink: 0;
+}
+
+.zen-weight-row__date {
+  padding: 12px 10px;
+  border-radius: var(--zen-radius-md);
+  border: 1.5px solid var(--zen-border);
+  background: #fbfdfa;
+  font-size: 14px;
+  color: var(--zen-text);
+  font-family: var(--font-body);
+}
+
+.zen-weight-row__date:focus {
+  outline: none;
+  border-color: var(--zen-primary);
+  box-shadow: 0 0 0 4px rgba(107, 144, 128, 0.15);
+}
+
+/* --- Tabs para elegir la meta activa (Mantenimiento, Déficit, Recomposición) --- */
+.zen-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.zen-tab {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--zen-border);
+  background: #fbfdfa;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--zen-text-soft);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.zen-tab.active {
+  background: var(--zen-primary);
+  border-color: var(--zen-primary);
+  color: #ffffff;
+}
+
+/* --- Textarea, mismo lenguaje visual que los inputs --- */
+.zen-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--zen-radius-md);
+  border: 1.5px solid var(--zen-border);
+  background: #fbfdfa;
+  font-size: 16px;
+  color: var(--zen-text);
+  font-family: var(--font-body);
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.zen-field textarea:focus {
+  outline: none;
+  border-color: var(--zen-primary);
+  box-shadow: 0 0 0 4px rgba(107, 144, 128, 0.15);
+}
+
+/* --- Tabs de navegación principal (Resumen / Peso / Diario) --- */
+.zen-section-tabs {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  border-bottom: 1.5px solid var(--zen-border);
+}
+
+.zen-section-tab {
+  flex: 1;
+  padding: 10px 8px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--zen-text-soft);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  margin-bottom: -1.5px;
+}
+
+.zen-section-tab.active {
+  color: var(--zen-primary-dark);
+  border-bottom-color: var(--zen-primary);
+}
+
+/* --- Contenedor de la gráfica de peso --- */
+.zen-chart-container {
+  width: 100%;
+  height: 220px;
+}
+
+/* --- Lista de historial (peso, etc.) --- */
+.zen-history-list {
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid var(--zen-border);
+  border-radius: var(--zen-radius-md);
+}
+
+.zen-history-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 14px;
+  font-size: 0.82rem;
+  border: none;
+  border-bottom: 1px solid var(--zen-border);
+  background: none;
+  font-family: var(--font-body);
+  color: var(--zen-text);
+}
+
+.zen-history-row--clickable {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.zen-history-row--clickable:hover {
+  background: var(--zen-accent);
+}
+
+.zen-history-row:last-child {
+  border-bottom: none;
+}
+
+.zen-history-row span:last-child {
+  font-weight: 600;
+  color: var(--zen-text-soft);
+}
+/* --- Calendario mensual (pestaña Diario) --- */
+.zen-calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.zen-calendar__title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--zen-primary-dark);
+  text-transform: capitalize;
+  font-size: 0.95rem;
+}
+
+.zen-calendar__nav-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--zen-border);
+  background: #fbfdfa;
+  color: var(--zen-primary-dark);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.zen-calendar__nav-btn:hover {
+  background: var(--zen-accent);
+}
+
+.zen-calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.zen-calendar__weekday {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--zen-text-soft);
+  padding-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.zen-calendar__day {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--zen-radius-md);
+  border: 1.5px solid transparent;
+  background: #fbfdfa;
+  font-size: 0.85rem;
+  color: var(--zen-text);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.zen-calendar__day:hover {
+  background: var(--zen-accent);
+}
+
+.zen-calendar__day--empty {
+  background: none;
+  border: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+.zen-calendar__day--today {
+  border-color: var(--zen-primary);
+}
+
+.zen-calendar__day--selected {
+  background: var(--zen-primary);
+  color: #ffffff;
+}
+
+.zen-calendar__day-dot {
+  position: absolute;
+  bottom: 4px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.zen-dashboard__greeting {
+  font-size: 1.1rem;
+  color: var(--zen-text-soft);
+  margin-bottom: 4px;
+}
+
+.zen-divider {
+  height: 1px;
+  background: var(--zen-border);
+  margin: 24px 0;
+  border: none;
+}
+
+.zen-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: var(--zen-text-soft);
+  font-family: var(--font-heading);
+}
+
+/* Pantallas muy angostas (iPhone SE, Android compactos) */
+@media (max-width: 380px) {
+  .zen-page {
+    padding: 16px;
+  }
+
+  .zen-card {
+    padding: 30px 22px;
+    border-radius: var(--zen-radius-md);
+  }
+
+  .zen-card__header h1 {
+    font-size: 1.35rem;
+  }
+
+  .zen-field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .zen-weight-row {
+    flex-direction: column;
+  }
+
+    .zen-topbar__brand {
+    display: none;
+  }
+
+  .zen-topbar__greeting {
+    text-align: left;
+  }
+}
