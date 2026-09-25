@@ -40,7 +40,14 @@ app.use(
 
 app.use(mongoSanitize());
 
-const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
+// --- CORS ---
+// CLIENT_URL admite una o varias URLs separadas por coma, por ejemplo:
+//   CLIENT_URL=https://mi-frontend.onrender.com,http://localhost:5173
+// Si no se define explícitamente, usamos RENDER_EXTERNAL_URL (que Render inyecta
+// automáticamente con la URL pública del propio servicio) como respaldo. Esto hace
+// que el despliegue de UN SOLO SERVICIO funcione sin configurar nada extra: el
+// backend permite automáticamente su propia URL pública como origen válido.
+const allowedOrigins = (process.env.CLIENT_URL || process.env.RENDER_EXTERNAL_URL || 'http://localhost:5173')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
@@ -61,7 +68,6 @@ app.use(express.json({ limit: '10kb' }));
 app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
-console.log('✅ /api/auth routes cargadas');
 app.use('/api/profile', profileRoutes);
 app.use('/api/weights', weightRoutes);
 app.use('/api/daily-logs', dailyLogRoutes);
@@ -80,8 +86,6 @@ if (isProduction && fs.existsSync(clientDist)) {
     res.sendFile(path.join(clientDist, 'index.html'));
   });
 }
-
-console.log('AUTH ROUTES CARGADAS');
 
 app.use(notFound);
 app.use(errorHandler);
