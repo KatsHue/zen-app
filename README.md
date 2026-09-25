@@ -12,8 +12,8 @@ Login funcional, seguro y listo para producción, con estética zen (verde, tran
 zen-login-app/
 ├── server/          # API Express (auth, JWT, MongoDB)
 ├── client/          # Frontend React + TypeScript (Vite)
-├── render.yaml       # Blueprint opcional para Render
-└── package.json      # Orquesta build/start para despliegue en un solo servicio
+├── render.yaml       # Blueprint 
+└── package.json      # Orquesta build/start para despliegue 
 ```
 
 En **producción**, Express sirve el build de React (`client/dist`) como archivos estáticos.
