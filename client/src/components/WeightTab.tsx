@@ -79,7 +79,6 @@ export default function WeightTab({
           value={weightDate}
           max={today}
           onChange={(e) => onWeightDateChange(e.target.value)}
-          style={{ flex: '0 0 150px' }}
           className="zen-weight-row__date"
         />
         <input
