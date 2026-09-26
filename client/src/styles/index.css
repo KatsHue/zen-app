@@ -479,6 +479,10 @@ a.zen-btn {
   align-items: stretch;
 }
 
+.zen-weight-row > input {
+  min-width: 0; /* evita que el input empuje al botón fuera de la tarjeta en pantallas angostas */
+}
+
 .zen-weight-row input {
   flex: 1;
   padding: 12px 14px;
@@ -753,7 +757,7 @@ a.zen-btn {
 }
 
 /* Pantallas muy angostas (iPhone SE, Android compactos) */
-@media (max-width: 380px) {
+@media (max-width: 480px) {
   .zen-page {
     padding: 16px;
   }

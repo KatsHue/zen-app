@@ -214,17 +214,19 @@ export default function Dashboard() {
                   <h1 style={{ fontSize: '1.2rem' }}>Tu meta</h1>
                 </div>
 
-                <div className="zen-tabs">
-                  {GOAL_KEYS.map((key) => (
-                    <button
-                      key={key}
-                      type="button"
-                      className={`zen-tab ${activeGoalKey === key ? 'active' : ''}`}
-                      onClick={() => handleSelectGoal(key)}
-                    >
-                      {GOAL_LABELS[key]}
-                    </button>
-                  ))}
+                                <div className="zen-field" style={{ marginBottom: 0 }}>
+                  <label htmlFor="goalSelect">Meta</label>
+                  <select
+                    id="goalSelect"
+                    value={activeGoalKey}
+                    onChange={(e) => handleSelectGoal(e.target.value as GoalKey)}
+                  >
+                    {GOAL_KEYS.map((key) => (
+                      <option key={key} value={key}>
+                        {GOAL_LABELS[key]}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div className="zen-result-card" style={{ marginTop: 16 }}>
