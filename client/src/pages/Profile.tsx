@@ -227,6 +227,8 @@ export default function Profile() {
           </form>
         </div>
 
+        <ChangePasswordCard />
+
         <button
           type="button"
           className="zen-btn zen-btn--ghost"
