@@ -31,6 +31,30 @@ const loginValidators = [
   handleValidation,
 ];
 
+const forgotPasswordValidators = [
+  body('email').trim().isEmail().withMessage('Correo electrónico no válido.').normalizeEmail(),
+  handleValidation,
+];
+
+const resetPasswordValidators = [
+  body('newPassword')
+    .isLength({ min: 8 })
+    .withMessage('La contraseña debe tener al menos 8 caracteres.')
+    .matches(/\d/)
+    .withMessage('La contraseña debe incluir al menos un número.'),
+  handleValidation,
+];
+
+const changePasswordValidators = [
+  body('currentPassword').notEmpty().withMessage('Ingresa tu contraseña actual.'),
+  body('newPassword')
+    .isLength({ min: 8 })
+    .withMessage('La nueva contraseña debe tener al menos 8 caracteres.')
+    .matches(/\d/)
+    .withMessage('La nueva contraseña debe incluir al menos un número.'),
+  handleValidation,
+];
+
 const { ACTIVITY_LEVELS, RENAL_STAGES, DIALYSIS_MODALITIES, GOAL_KEYS } = require('../models/Profile');
 
 const profileValidators = [
@@ -97,6 +121,9 @@ const measurementValidators = [
 module.exports = {
   registerValidators,
   loginValidators,
+  forgotPasswordValidators,
+  resetPasswordValidators,
+  changePasswordValidators,
   profileValidators,
   weightValidators,
   dailyLogValidators,

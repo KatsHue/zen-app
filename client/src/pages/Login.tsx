@@ -31,8 +31,8 @@ export default function Login() {
       <div className="zen-card">
         <div className="zen-card__header">
           <div className="zen-card__icon">🌿</div>
-          <h1>Bienvenido</h1>
-          <p>Respira hondo e inicia sesión</p>
+          <h1>Bienvenido de nuevo</h1>
+          <p>Respira hondo. Inicia sesión para continuar tu espacio.</p>
         </div>
 
         <ErrorAlert error={error} />
@@ -66,6 +66,10 @@ export default function Login() {
             {isSubmitting ? 'Ingresando...' : 'Iniciar sesión'}
           </button>
         </form>
+
+        <p className="zen-footer-text" style={{ marginTop: 12 }}>
+          <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
+        </p>
 
         <p className="zen-footer-text">
           ¿Aún no tienes cuenta? <Link to="/register">Crea una aquí</Link>

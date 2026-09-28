@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useProfile } from '../hooks/useProfile';
+import ChangePasswordCard from '../components/ChangePasswordCard';
 import {
   ACTIVITY_LEVELS,
   RENAL_STAGES,

@@ -32,6 +32,16 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    // Recuperación de contraseña: solo guardamos el HASH del token (nunca el token real),
+    // igual que hacemos con la contraseña. select:false para que no viaje en queries normales.
+    resetPasswordTokenHash: {
+      type: String,
+      select: false,
+    },
+    resetPasswordExpires: {
+      type: Date,
+      select: false,
+    },
   },
   { timestamps: true }
 );
@@ -55,6 +65,8 @@ userSchema.set('toJSON', {
     delete ret.password;
     delete ret.loginAttempts;
     delete ret.lockUntil;
+    delete ret.resetPasswordTokenHash;
+    delete ret.resetPasswordExpires;
     delete ret.__v;
     return ret;
   },

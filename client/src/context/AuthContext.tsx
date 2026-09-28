@@ -16,6 +16,9 @@ interface AuthContextValue {
   register: (name: string, email: string, password: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  forgotPassword: (email: string) => Promise<string>;
+  resetPassword: (token: string, newPassword: string) => Promise<string>;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<string>;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -93,8 +96,40 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const forgotPassword = async (email: string): Promise<string> => {
+    try {
+      const { data } = await api.post<{ message: string }>('/auth/forgot-password', { email });
+      return data.message;
+    } catch (error) {
+      throw buildAuthError(error, 'No se pudo procesar tu solicitud.');
+    }
+  };
+
+  const resetPassword = async (token: string, newPassword: string): Promise<string> => {
+    try {
+      const { data } = await api.post<{ message: string }>(`/auth/reset-password/${token}`, { newPassword });
+      return data.message;
+    } catch (error) {
+      throw buildAuthError(error, 'No se pudo restablecer tu contraseña.');
+    }
+  };
+
+  const changePassword = async (currentPassword: string, newPassword: string): Promise<string> => {
+    try {
+      const { data } = await api.put<{ message: string }>('/auth/change-password', {
+        currentPassword,
+        newPassword,
+      });
+      return data.message;
+    } catch (error) {
+      throw buildAuthError(error, 'No se pudo cambiar tu contraseña.');
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, register, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, isLoading, register, login, logout, forgotPassword, resetPassword, changePassword }}
+    >
       {children}
     </AuthContext.Provider>
   );
